@@ -3,6 +3,7 @@
 int main(){
 	int a, b;
 	scanf("%d %d", &a, &b);
+	// Eseguo lo scambio tramite XOR
 	a = (a & ~b)|(b & ~a);
 	b = (a & ~b)|(b & ~a);
 	a = (a & ~b)|(b & ~a);
