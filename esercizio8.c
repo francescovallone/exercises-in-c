@@ -2,7 +2,7 @@
 #include <math.h>
 
 int main(){
-	int a, i, n, d, r, q;
+	int a, i, n, d, r;
 	// Prendo i valori di a e di i
 	scanf("%d %d", &a, &i);
 	n = pow(2,i);
