@@ -1,14 +1,12 @@
 #include <stdio.h>
 
 int main(){
-	int a, i, bit;
+	int a, i;
 	char choose;
 	scanf("%d %d %c", &a, &i, &choose);
-	// Prendo il bit in posizione i
-	bit = (a >> i) & 1;
 	switch(choose){
 		case 'c':
-			// Eseguo l'operazione XOR per cambiare valore al bit in posizione i
+			// Eseguo l'operazione XOR per scambiare il valore al bit in posizione i
 			a = a ^ 1 << (i-1);
 			break;
 		case 'z':
