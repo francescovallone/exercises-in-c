@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <math.h>
 
 int primo(int a);
 
@@ -19,7 +18,7 @@ int primo(int a){
 	for(i = 2; i<=a/2; i++){
 		if(a%i == 0){
 			j = 1;
-			break;	
+			break;
 		}
 	}
 	if(j == 0){
