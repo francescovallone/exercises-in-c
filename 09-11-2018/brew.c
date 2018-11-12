@@ -26,10 +26,12 @@ int mcm(int a, int b){
 
 
 void analyze(void){
-	int i, r, c=0, d=0, temp, pos=0, neg=0, even=0, odd=0, none=0;
+	int i=0, r, c=0, d=0, temp, pos=0, neg=0, even=0, odd=0, none=0;
 
 	while(scanf("%d", &r)){
-		
+		if(i == 0){
+			temp = r;
+		}
 		if(r < 0){
 			neg++;
 		}else if(r == 0){
@@ -47,14 +49,15 @@ void analyze(void){
 		}else if(r > temp){
 			c++;
 		}
+		i++;
 		temp = r;
 	}
 	if(d > 0 && c == 0){
-		printf("La funzione e' decrescente \n");
+		printf("La successione e' decrescente \n");
 	}else if(c > 0 && d == 0){
-		printf("La funzione e' crescente \n");
+		printf("La successione e' crescente \n");
 	}else{
-		printf("La funzione non e' ne crescente ne decrescente \n");
+		printf("La successione non e' ne crescente ne decrescente \n");
 	}
 	printf("I numeri negativi sono %d \n", neg);
 	printf("I numeri positivi sono %d \n", pos);
