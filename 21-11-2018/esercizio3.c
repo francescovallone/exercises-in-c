@@ -19,7 +19,11 @@ int main(){
 int check(float *v, int i){
 	int l, n=0;
 	for(l=0; l<i; l++){
-		n = v[l] >= v[l-1] ? 1 : 0;
+		if(v[l] >= v[l-1]){
+			n = 1;
+		}else{
+			return 0;
+		}
 	}
-	return n;
+	if(n) return 1;
 }
