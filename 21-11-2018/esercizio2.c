@@ -20,9 +20,5 @@ int check(int *v, int i){
 	for(l=0; l<i; l++){
 		n = v[l] == v[l-1] ? 1 : 0;
 	}
-	if(!n){
-		return 0;	
-	}else{
-		return 1;	
-	}
+	return n;
 }
