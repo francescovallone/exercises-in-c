@@ -11,22 +11,22 @@ int main(){
 		i++;
 	}
 	getchar();
-	indexing(v, i);
+	printf("%d", indexing(v, i));
 	return 0;
 }
 
 
-void indexing(int *v, int i){
+int indexing(int *v, int i){
 	int l, n, flag=0;
 	printf("Scegli il valore da verificare: ");
 	scanf("%d", &n);
 	for(l=0; l<i; l++){
 		if(v[l] == n){
-			printf("Il valore %d si trova nella posizione %d \n", n, l);
 			flag = 1;
+			return l;
 		}
 	}
 	if(!flag){
-		printf("-1 \n");		
+		return 	-1;	
 	}
 }

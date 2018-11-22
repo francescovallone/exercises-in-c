@@ -16,13 +16,9 @@ int main(){
 
 
 int check(int *v, int i){
-	int l, n=0;
-	for(l=0; l<i; l++){
-		if(v[l] == v[l-1]){
-			n = 1;
-		}else{
-			return 0;
-		}
+	int j, a=1, b = v[0];
+	for(j = 1; j<i && a; j++){
+		a = (b==v[j]) ? 1 : 0;
 	}
-	if(n) return 1;
+	return a;
 }

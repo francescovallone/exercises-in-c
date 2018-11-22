@@ -15,8 +15,8 @@ int main(){
 
 int palindrome(char *v, int i){
 	int l, n, flag=0;
-	for(l=0, n=i-1; l<=n && n>=l; n--, l++){
-		if(v[l] == v[n]){
+	for(l=0; l <= i/2 ; l++){
+		if(v[l] == v[(i-1)-l]){
 			flag = 1;
 		}else{
 			return 0;
