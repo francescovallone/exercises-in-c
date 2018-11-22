@@ -2,16 +2,15 @@
 
 
 int main(){
-	char v[100], s[100];
+	char v[100];
 	int i,l,c;
-	scanf("%s", v);
+	scanf("%[^\n]s", v);
 	for(i=0; v[i] != '\0'; i++);
 	for(l=0; l < i; l++){
-		if(v[l] >= 'a' && v[l] <= 'z'){
-			c = (int) v[l] - 32;
-			s[l] = c;		
+		if(v[l] >= 'a' && v[l] <= 'z' && v[l] != ' '){
+			v[l] = (int) v[l] - 32;
 		}
 	}
-	printf("%s \n", s);
+	printf("%s", v);
 	return 0;
 }
