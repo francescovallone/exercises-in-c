@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 
-void indexing(int *v, int i);
+int indexing(int *v, int i);
 
 
 int main(){
