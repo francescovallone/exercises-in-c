@@ -14,14 +14,10 @@ int main(){
 
 
 int palindrome(char *v, int i){
-	int l, n, flag=0;
-	for(l=0; l <= i/2 ; l++){
-		if(v[l] == v[(i-1)-l]){
-			flag = 1;
-		}else{
-			return 0;
-		}
+	int l, n, flag=1;
+	for(l=0; l <= i/2 && flag; l++){
+		flag = v[l] == v[(i-1)-l] ? 1 : 0;
 	}
-	if(flag) return 1;
+	return flag;
 }
 
