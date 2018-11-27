@@ -21,5 +21,6 @@ void make_palindrome_great_again(char *s){
 		}
 	}
 	strcat(t, s);
-	printf("%s", t);
+	strcpy(s, t);
+	printf("%s", s);
 }
