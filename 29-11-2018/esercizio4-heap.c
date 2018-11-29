@@ -7,19 +7,23 @@ void add_char(char *s, int pos, char c);
 
 
 int main(){
-	char s[100] = "ciao";
-	make_palindrome_great_again(s); // oaiciao
+	char *s;
+	s = malloc(100*sizeof(char));
+	scanf("%s", s);
+	make_palindrome_great_again(s);
 	printf("%s", s);
+	free(s);
 	return 0;
 }
 
 
 void add_char(char *s, int pos, char c){
-	char *p = s + pos;
-	char b[100];
+	char *p = s + pos, *b;
+	b = malloc((strlen(s)+1)*sizeof(char));
 	strcpy(b, p);
 	s[pos] = c;
 	strcpy(p+1, b);
+	free(b);
 }
 
 

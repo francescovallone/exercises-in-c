@@ -4,9 +4,8 @@ void asteriskize(int *v, int i);
 
 
 int main(){
-	int v[100], i=0, m;
-	while(scanf("%d", &m)){
-		v[i] = m;
+	int v[100], i=0;
+	while(scanf("%d", &v[i])){
 		i++;
 	}
 	asteriskize(v, i);
@@ -15,14 +14,12 @@ int main(){
 
 
 void asteriskize(int *v, int i){
-	int l, n, c;
-	for(l = 0; l<i;){
-		c = v[l];
-		for(n = 0; n < c; n++){
+	int l, n;
+	for(l = 0; l<i;	l++){
+		for(n = 0; n < v[l]; n++){
 			printf("*");
 		}
 		printf("\n");
-		l++;
 	}
 }
 
