@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 
+/*
+L'esercizio linkato è più corretto.
+https://github.com/vincenzocorso/exercises_c/blob/master/lez24/es2.c
+*/
 
 void to_the_end(char *s, char *r);
 
