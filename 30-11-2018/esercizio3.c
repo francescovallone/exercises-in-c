@@ -4,10 +4,10 @@
 
 void console(char **v, int dim);
 void init_vector(char **v, int dim);
-void add_string(char **v, int dim);
+void add_string(char ***v, int dim);
 void max_string(char **v, int dim);
 void min_string(char **v, int dim);
-void del_string(char **v, int dim);
+void del_string(char ***v, int dim);
 void search(char **v, int dim);
 void get_index(char **v, int dim);
 void print_int_vector(char *s, int v[],int dim);
@@ -41,7 +41,7 @@ void init_vector(char **v, int dim){
 }
 
 
-void add_string(char **v, int dim){
+void add_string(char ***v, int dim){
 	v = realloc(v, (dim)*sizeof(char*));
 	char input[1000];
 	printf("Inserisci la stringa che vuoi aggiungere: ");
@@ -74,7 +74,7 @@ void min_string(char **v, int dim){
 }
 
 
-void del_string(char **v, int dim){
+void del_string(char ***v, int dim){
 	char s[1000];
 	print_string_vector("Il tuo array: ", v, dim+1);
 	printf("\nScegli una delle stringhe che trovi nell'array qui sopra per cancellarla: ");
