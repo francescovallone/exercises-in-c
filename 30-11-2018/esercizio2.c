@@ -34,7 +34,7 @@ void sort_string(char* v[], int dim, int *s){
 		}
 	}
 	for(l=0; l<dim; l++){
-		free(v[l]); // I AM FREE
+		free(v[l]); // AND I AM FREE, FREE FALLING!
 	}
 }
 

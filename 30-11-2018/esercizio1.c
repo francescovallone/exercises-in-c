@@ -17,22 +17,22 @@ int sort_string(char* v[], int dim){
 	char input[1000];
 	for(i=0; i<dim; i++){
 		scanf("%s", input);
-		v[i] = malloc((strlen(input)+1)*sizeof(char));
+		v[i] = (char*) malloc((strlen(input)+1)*sizeof(char));
 		strcpy(v[i], input);
 	}
 	for(i=0; i<dim-1; i++){
-		if(strcmp(v[i], v[i+1]) < 0){
-			c++;
-		}else if(strcmp(v[i], v[i+1]) > 0){
-			d++;
+		if(strcmp(v[i], v[i+1]) > 0){
+			c = 1;
+		}else if(strcmp(v[i], v[i+1]) < 0){
+			d = 1;
 		}
 	}
 	for(l=0; l<dim; l++){
-		free(v[l]); // I AM FREE
+		free(v[l]); // AND I AM FREE, FREE FALLING!
 	}
-	if(d == 0 && c != 0){
+	if(d != 0 && c == 0){
 		return 1;
-	}else if(d != 0 && c == 0){
+	}else if(d == 0 && c != 0){
 		return -1;
 	}
 	return 0;

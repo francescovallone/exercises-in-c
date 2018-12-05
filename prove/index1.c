@@ -13,7 +13,7 @@ int main(){
 				c = s[j];
 				s[j] = s[l];
 				s[l] = c;
-			}  
+			}
 		}
 	}
 	printf("%s", s);
