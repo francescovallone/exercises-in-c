@@ -39,7 +39,7 @@ char** init_vector(char **v, int dim){
 		printf("Inserisci la stringa in posizione %d: ", i);
 		scanf("%[^\n]s", input);
 		getchar();
-		v[i] = malloc((strlen(input))*sizeof(char));
+		v[i] = (char*) malloc((strlen(input))*sizeof(char));
 		strcpy(v[i], input);
 	}
 	return v;
@@ -52,7 +52,7 @@ char** add_string(char **v, int dim){
 	printf("Inserisci la stringa che vuoi aggiungere: ");
 	scanf("%[^\n]s", input);
 	getchar();
-	v[dim-1] = malloc((strlen(input))*sizeof(char));
+	v[dim-1] = (char*) malloc((strlen(input))*sizeof(char));
 	strcpy(v[dim-1], input);
 	return v;
 }
@@ -95,7 +95,7 @@ char** del_string(char **v, int dim){
 	for(int c=pos; c<dim; c++){
 		v[c] = v[c+1];
 	}
-	v = realloc(v, dim*sizeof(char*));
+	v = (char**) realloc(v, dim*sizeof(char*));
 	free(v[dim+1]);
 	return v;
 }
