@@ -1,112 +1,80 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 
-void init_ab(char** v, char** z, int* n);
-char* search(char** v, char** z, char* s, char* t, int n);
-char** order(char** v, char** z, int n);
-void print_string_vector(char *s, char **v, int dim);
+
+void init_ab(char v[][200], char d[][200], int* n);
+char* search(int n, char v[][200], char d[][200], char* s);
+void order(char v[][200], char d[][200], int n);
 
 
 int main(){
-	char** v, z;
-	v = (char**) malloc(200*sizeof(char*));
-	z = (char**) malloc(200*sizeof(char*));
-	char s[200], t[200];
+	char v[10][200], d[10][200];
+	char t[200];
 	int* n;
-	init_ab(v, z, &n);
+	init_ab(v, d, &n);
 	int r = n;
 	printf("Inserisci il nome completo della persona che vuoi cercare: ");
 	scanf("%[^\n]s", t);
 	getchar();
-	search(v, z, &s, t, r);
-	printf("Il numero di %s è %s", t, s);
-	free(v);
-	free(z);
+	printf("Il numero di %s e' %s.", t, search(n, v, d, t));
 	return 0;
 }
 
 
-void init_ab(char** v, char** z, int* n){
+void init_ab(char v[][200], char d[][200], int* n){
 	char s[200], t[200];
 	int flag = 1, i;
 	printf("Ora dovrai inserire il nome completo [nome e cognome] di ogni contatto, se vuoi smettere scrivi 'close'.\n");
-	i=0;
-	do{
+	for(i = 0; flag;){
 		printf("Inserisci nome e cognome del contatto: ");
 		scanf("%[^\n]s", s);
 		getchar();
 		if(!strcmp(s, "close")){
 			flag = 0;
 		}else{
-			printf("Inserisci ora il numero di %s: ", s);
+			printf("Inserisci il numero di %s: ", s);
 			scanf("%s", t);
 			getchar();
-			v[i] = (char*) malloc((strlen(s))*sizeof(char));
-			z[i] = (char*) malloc((strlen(t))*sizeof(char));
 			strcpy(v[i], s);
-			strcpy(z[i], t);
+			strcpy(d[i], t);
 			i++;
 		}
-	}while(flag);
+	}
 	*n = i;
 }
 
 
-void print_string_vector(char *s, char **v, int dim){
-	printf("%s", s);
-	printf("{");
-	for(int i=0; i < dim; i++){
-		if(i != dim-1){
-			printf("%s, ", v[i]);
-		}else{
-			printf("%s", v[i]);
-		}
-	}
-	printf("}\n");
-}
-
-
-char** order(char** v, char** z, int n){
-	int l, j;
-	char* c, r;
-	c = (char*) malloc(200*sizeof(char));
-	r = (char*) malloc(200*sizeof(char));
-	for (j = 0; j < n; j++){
-		for (l = 0; l < n; l++){
+void order(char v[][200], char d[][200], int n){
+	char c[200], r[200];
+	for (int j = 0; j < n; j++){
+		for (int l = 0; l < n; l++){
 			if (strcmp(v[l], v[j]) > 0){
 				strcpy(c, v[j]);
-				strcpy(r, z[j]);
+				strcpy(r, d[j]);
 				strcpy(v[j], v[l]);
-				strcpy(z[j], z[l]);
+				strcpy(d[j], d[l]);
 				strcpy(v[l], c);
-				strcpy(z[l], r);
+				strcpy(d[l], r);
 			}
 		}
 	}
-	print_string_vector("Test: ", v, n);
-	free(c);
-	return v;
 }
 
 
-char* search(char** v, char** z, char* s, char* t, int n){
+char* search(int n, char v[][200], char d[][200], char* s){
 	int f = 0, l = n-1, m = (f+l)/2;
-	v = order(v, z, n);
+	order(v, d, n);
 	while(f <= l){
-		if(!strcmp(v[m], t)){
-			strcpy(s, z[m]);
-			return s;
-		}else if(strcmp(v[m], t) < 0){
+		if(!strcmp(v[m], s)){
+			return d[m];
+		}else if(strcmp(v[m], s) < 0){
 			f = m + 1;
 		}else{
 			l = m - 1;
 		}
 		if(f>l){
-			strcpy(s, "Non esiste questo contatto!");
-			return s;
+			return "Il contatto non è in rubrica";
 		}
 		m = (f + l)/2;
 	}
-	return s;
 }

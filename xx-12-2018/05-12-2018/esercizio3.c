@@ -34,15 +34,15 @@ int main(){
 
 
 char** order_strings(int t, char** a, int n){
-	char* c[100];
+	char c[100];
 	int l, j;
 	if(!t){
 		for (j = 0; j < n; j++){
 			for (l = 0; l < n; l++){
 				if (strcmp(a[l], a[j]) > 0){
-					*c = a[j];
-					a[j] = a[l];
-					a[l] = *c;
+					strcpy(c, a[j]);
+					strcpy(a[j], a[l]);
+					strcpy(a[l], c);
 				}
 			}
 		}
@@ -50,9 +50,9 @@ char** order_strings(int t, char** a, int n){
 		for (j = 0; j < n; j++){
 			for (l = 0; l < n; l++){
 				if (strcmp(a[l], a[j]) < 0){
-					*c = a[j];
-					a[j] = a[l];
-					a[l] = *c;
+					strcpy(c, a[j]);
+					strcpy(a[j], a[l]);
+					strcpy(a[l], c);
 				}
 			}
 		}
