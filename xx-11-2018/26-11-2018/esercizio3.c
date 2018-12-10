@@ -19,7 +19,7 @@ void compare(char *s, char *t){
 		for(i=0; i<strlen(s); i++){
 			if(s[i] == t[r]){
 				strcpy(&s[i], &s[i+1]);
-			}		
+			}
 		}
 	}
 	

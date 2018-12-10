@@ -29,4 +29,5 @@ void to_the_end(char *s, char *r){
 	if(!(strcmp(t, "fine."))){
 		r = strncpy(r, s, strlen(s)-5);
 	}
+	r[strlen(r)] = '\0';
 }
