@@ -1,3 +1,4 @@
+# COPIATO SPUDARATAMENTE DA VINCENZO
 CC		=	gcc
 CFLAGS		=	-Wall
 PATH		=	C:\Users\Francesco\Documents\working\exercises-in-c\xx-12-2018\18-12-2018
