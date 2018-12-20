@@ -12,11 +12,12 @@ int main(){
 	for(i=0; i<N; i++){
 		v[i] = &a[i];
 	}
-	bubble_sort(a, N, "int");
+	bubble_sort(v, N, "int");
 	for(i=0; i<N; i++){
 		d = (int *) v[i];
 		printf("%d ", *d);
 	}
+	free(v);
 }
 
 int compare(void *a, void *b, char *s){
