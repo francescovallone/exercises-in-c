@@ -1,0 +1,14 @@
+Queste sono le mie risposte, ci possono benissimo essere errori!
+Risposte per il file Prova_In_itinere_di_Programmazione_e_Laboratorio_II .pdf
+
+1) A
+2) C
+3) C
+4) Nessuna delle risposte è corretta il programma stamperà "9,9,9,9," e si fermerà.
+5) A
+6) Vedi esercizio6_III.c
+7) B
+8) C
+9) A
+10) B
+11) Vedi esercizio11.c
