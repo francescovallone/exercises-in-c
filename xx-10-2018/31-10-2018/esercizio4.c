@@ -1,12 +1,17 @@
 #include <stdio.h>
 
+/* ESERCIZIO CORRETTO */
+
 int main(){
-	int k, j, r;
+	int k, j, r, a=0;
 	scanf("%d", &k);
-	r = k*k - ((k-1)*k);
-	// Stampo tutti i valori seguiti da ,
-	for (j=1; j<=r; j++){
-		printf("%d,", j);
+	for(j = 1; j<=k; j++){
+		for(r = 1; r <= j; r++){
+			printf("%d", ++a);
+			if(r == j){
+				printf("\n");
+			}
+		}
 	}
 	return 0;
 }
