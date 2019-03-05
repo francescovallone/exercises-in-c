@@ -7,9 +7,7 @@ int fibo(int n);
 int main(){
 	int n;
 	scanf("%d", &n);
-	for(int i = 0; i<=n; i++){
-		printf("%d ", fibo(i));
-	}
+	printf("%d", fibo(n));
 	return 0;
 }
 
