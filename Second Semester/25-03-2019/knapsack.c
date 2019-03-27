@@ -8,7 +8,8 @@
 #define MAX 20
 
 
-static int dpTable[ITEMS+1][WEIGHT+1];
+static int dpTable[ITEMS][WEIGHT];
+static int dpArray[ITEMS];
 
 
 typedef struct item{
@@ -19,10 +20,11 @@ typedef struct item{
 
 int knapsackRecursive(item items[], int n, int knapsize);
 int knapsackIterative(item items[], int n, int knapsize);
-int knapsackUnlimited(item items[], int n, int knapsize);
+int knapsackUnbounded(item items[], int n, int knapsize);
 void getElements(item items[], int n, int knapsize, int result);
+void getUnboundedElements(item items[], int n, int knapsize, int result);
 int max(int a, int b);
-void print_dpTable(int n, int w);
+void printDpTable(int n, int w);
 
 
 int main(){
@@ -37,9 +39,10 @@ int main(){
 	printf("\n");
 	// value = knapsackRecursive(items, ITEMS, knapsize);
 	// value = knapsackIterative(items, ITEMS, knapsize);
-	value = knapsackUnlimited(items, ITEMS, knapsize);
+	value = knapsackUnbounded(items, ITEMS, knapsize);
 	// print_dpTable(ITEMS, knapsize);
 	// getElements(items, ITEMS, knapsize, value);
+	getUnboundedElements(items, ITEMS, knapsize, value);
 	printf("\nValore rubato = %d", value);
 	return 0;
 }
@@ -65,7 +68,7 @@ int knapsackIterative(item items[], int n, int knapsize){
 		}
 	}
 	for(size_t i = 1; i < n; i++){
-		for(size_t j = 0; j <= knapsize; j++){
+		for(size_t j = 0; j < knapsize; j++){
 			dpTable[i][j] = dpTable[i-1][j];
 			if(j >= items[i].weight){
 				int v = dpTable[i-1][j-items[i].weight] + items[i].value;
@@ -75,25 +78,35 @@ int knapsackIterative(item items[], int n, int knapsize){
 			}
 		}
 	}
-	return dpTable[n-1][knapsize];
+	print_dpTable(n, knapsize);
+	return dpTable[n-1][knapsize-1];
 }
 
-// TO-DO: It doesn't work with the iterative way.
-void getElements(item items[], int n, int knapsize, int result){
-	int value = result;
-	printf("%d", result);
-	int ks = knapsize;
-	for(int i = n; i > 0 && value > 0; i--){
-		if(value == (dpTable[i-1][ks-items[i-1].weight] + items[i-1].value)){
-			printf("x = %d ", i-1);
-			value -= items[i-1].value;
-			ks -= items[i-1].weight;
-		}
+
+int knapsackUnbounded(item items[], int n, int knapsize){
+	if(knapsize <= 0 || n == 0) return 0;
+	if(items[n-1].weight > knapsize) return knapsackRecursive(items, n, knapsize);
+	if(dpTable[n-1][knapsize - items[n-1].weight] == 0) dpTable[n-1][knapsize - items[n-1].weight] = knapsackRecursive(items, n, knapsize - items[n-1].weight);
+	if(dpTable[n-1][knapsize] == 0){
+		dpTable[n-1][knapsize] = knapsackRecursive(items, n, knapsize);
+		return max(dpTable[n-1][knapsize-items[n-1].weight] + items[n-1].value, dpTable[n-1][knapsize]);
 	}
 }
 
+// Da finire.
+void getUnboundedElements(item items[], int n, int knapsize, int result){
+}
 
-int knapsackUnlimited(item items[], int n, int knapsize){
+
+void getElements(item items[], int n, int knapsize, int result){
+	int ks = knapsize;
+	for(int i = n; i > 0 && result > 0; i--){
+		if(result == (dpTable[i-1][ks-items[i-1].weight] + items[i-1].value)){
+			printf("x = %d ", i-1);
+			result -= items[i-1].value;
+			ks -= items[i-1].weight;
+		}
+	}
 }
 
 
