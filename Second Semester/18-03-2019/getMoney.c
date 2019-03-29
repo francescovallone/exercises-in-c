@@ -38,7 +38,7 @@ int main(){
 	printf("Backtrack of the array: \n");
 	for(int i=0; i<n; i++){
 		for(int j=0; j<m; j++){
-			printf("%d\t", bt[i][j]);
+			printf("%3d", bt[i][j]);
 		}
 		printf("\n");
 	}

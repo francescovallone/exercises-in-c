@@ -24,7 +24,7 @@ int knapsackUnbounded(item items[], int n, int knapsize);
 void getElements(item items[], int n, int knapsize, int result);
 void getUnboundedElements(item items[], int n, int knapsize, int result);
 int max(int a, int b);
-void printDpTable(int n, int w);
+void print_dpTable(int n, int w);
 
 
 int main(){
@@ -40,7 +40,7 @@ int main(){
 	// value = knapsackRecursive(items, ITEMS, knapsize);
 	// value = knapsackIterative(items, ITEMS, knapsize);
 	value = knapsackUnbounded(items, ITEMS, knapsize);
-	// print_dpTable(ITEMS, knapsize);
+	print_dpTable(ITEMS, knapsize);
 	// getElements(items, ITEMS, knapsize, value);
 	getUnboundedElements(items, ITEMS, knapsize, value);
 	printf("\nValore rubato = %d", value);
@@ -85,7 +85,7 @@ int knapsackIterative(item items[], int n, int knapsize){
 
 int knapsackUnbounded(item items[], int n, int knapsize){
 	if(knapsize <= 0 || n == 0) return 0;
-	if(items[n-1].weight > knapsize) return knapsackRecursive(items, n, knapsize);
+	if(items[n-1].weight > knapsize) return knapsackRecursive(items, n-1, knapsize);
 	if(dpTable[n-1][knapsize - items[n-1].weight] == 0) dpTable[n-1][knapsize - items[n-1].weight] = knapsackRecursive(items, n, knapsize - items[n-1].weight);
 	if(dpTable[n-1][knapsize] == 0){
 		dpTable[n-1][knapsize] = knapsackRecursive(items, n, knapsize);
@@ -95,6 +95,12 @@ int knapsackUnbounded(item items[], int n, int knapsize){
 
 // Da finire.
 void getUnboundedElements(item items[], int n, int knapsize, int result){
+	int ks = knapsize;
+	for(int i=0; i<n; i++){
+		for(int j=0; j<ks; j++){
+			
+		}
+	}
 }
 
 
