@@ -26,51 +26,20 @@ ptrNode merge(ptrNode list1, ptrNode list2);
 
 
 int main(void){
-	ptrNode head = NULL;
-	int choice;
-	char c;
-	printf("Write a number [Range: 1-3]: ");
-	scanf("%d", &choice);
-	getchar();
-	while(choice != 4){
-		switch (choice){
-			case 1:
-				printf("Enter a char: ");
-				scanf("%c", &c);
-				insert(&head, c);
-				printList(head);
-				break;
-			case 2:
-				if(!isEmpty(head)){
-					printf("Enter a char: ");
-					scanf("%c", &c);
-					if(delete(&head, c)){
-						printf("\nYay, element %c deleted\n", c);
-						printList(head);
-					}else{
-						printf("\nThe element is not in the list, dumbass!");
-					}
-				}else{
-					printf("\nThe list is empty, dumbass!");
-				}
-				break;
-			case 3:
-				if(!isEmpty(head)){
-					printList(head);
-					printf("Enter a char: ");
-					scanf("%c", &c);
-					if(search(head, c)){
-						printf("\nThe char %c is in the list\n", c);
-					}else{
-						printf("\nThe char %c is not in the list\n", c);
-					}
-				}
-		}
-		printf("Write a number [Range: 1-3]: ");
-		scanf("%d", &choice);
-		getchar();
+	ptrNode head1 = NULL;
+	ptrNode head2 = NULL;
+	ptrNode result;
+	for(int i=0; i<ITEMS; i+=2){
+		insert(&head1, 97+i);
+		insert(&head2, 98+i);
 	}
-	freeList(head);
+	printList(head1);
+	printList(head2);
+	result = merge(head1, head2);
+	printList(result);
+	freeList(head2);
+	freeList(head1);
+	freeList(result);
 	return 0;
 }
 
@@ -133,6 +102,57 @@ ptrNode search(ptrNode ptr, char value){
 	if(ptr == NULL || ptr->value > value) return NULL;
 	if(ptr->value == value) return ptr;
 	return search(ptr->next, value);
+}
+
+
+ptrNode merge(ptrNode const list1, ptrNode const list2){
+	ptrNode cl1, cl2, result, rc;
+	cl1 = list1;
+	cl2 = list2;
+	if((rc = malloc(sizeof(ptrNode))) == NULL){
+		return NULL;
+	}
+	rc->next = NULL;
+	result = rc;
+	while((cl1 != NULL) && (cl2 != NULL)){
+		if((cl1->value) <= (cl2->value)){
+			rc->value = cl1->value;
+			cl1 = cl1->next;
+		}else{
+			rc->value = cl2->value;
+			cl2 = cl2->next;
+		}
+		if((rc->next = malloc(sizeof(ptrNode))) == NULL){
+			freeList(result);
+			return NULL;
+		}
+		rc = rc->next;
+		rc->next = NULL;
+	}
+	if(cl1 == NULL){
+		rc->value = cl2->value;
+		while((cl2 = cl2->next) != NULL){
+			if((rc->next = malloc(sizeof(ptrNode))) == NULL){
+				freeList(result);
+				return NULL;
+			}
+			rc = rc->next;
+			rc->value = cl2->value;
+			rc->next = NULL;
+		}
+	}else{
+		rc->value = cl1->value;
+		while((cl1 = cl1->next) != NULL){
+			if((rc->next = malloc(sizeof(ptrNode))) == NULL){
+				freeList(result);
+				return NULL;
+			}
+			rc = rc->next;
+			rc->value = cl1->value;
+			rc->next = NULL;
+		}
+	}
+	return result;
 }
 
 
