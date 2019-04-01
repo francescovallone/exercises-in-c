@@ -112,9 +112,9 @@ ptrNode naturalMerge(ptrNode head){
 		result = result->next;
 	}
 	for(int i=0; i<ITEMS; i++){
-		for(int j=1; j<ITEMS; j++){
+		for(int j=i+1; j<ITEMS; j++){
 			if(array[j-1]->value > array[j]->value){
-				array[j]->next = NULL;
+				array[j-1]->next = NULL;
 				natural[k] = array[i];
 				i = j;
 				k++;
