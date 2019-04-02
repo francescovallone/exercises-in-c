@@ -124,9 +124,9 @@ ptrNode naturalMerge(ptrNode head){
 	if(array[ITEMS-2] > array[ITEMS-1]){
 		natural[k++] = array[ITEMS-1];
 	}
-	result = NULL;
-	for(int i=0; i<k; i++){
-		result = merge(natural[i], result);
+	result = natural[0];
+	for(int i=1; i<k; i++){
+		result = merge(result, natural[i]);
 	}
 	return result;
 }
