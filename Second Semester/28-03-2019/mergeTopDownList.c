@@ -21,7 +21,8 @@ int isEmpty(ptrNode ptr);
 void printList(ptrNode ptr);
 void freeList(ptrNode ptr);
 ptrNode merge(ptrNode list1, ptrNode list2);
-ptrNode naturalMerge(ptrNode head);
+void mergeTopDown(ptrNode *headPtr);
+void getMiddle(ptrNode head, ptrNode* left, ptrNode* middle);
 
 
 
@@ -33,8 +34,8 @@ int main(void){
 		insert(&head, (97 + (rand() % ITEMS)));
 	}
 	printList(head);
-	result = naturalMerge(head);
-	printList(result);
+	mergeTopDown(&head);
+	printList(head);
 	freeList(head);
 	freeList(result);
 	return 0;
@@ -42,10 +43,29 @@ int main(void){
 
 
 void insert(ptrNode *ptr, char value){
-	ptrNode newPtr = malloc(sizeof(Node));
-	newPtr->value = value;
-	newPtr->next = (*ptr);
-	(*ptr) = newPtr;
+	ptrNode newPtr;
+	ptrNode previousPtr;
+	ptrNode currentPtr;
+	newPtr = malloc(sizeof(Node));
+	if(newPtr != NULL){
+		newPtr->value = value;
+		newPtr->next = NULL;
+		previousPtr = NULL;
+		currentPtr = (*ptr);
+		while(currentPtr != NULL){
+			previousPtr = currentPtr;
+			currentPtr = currentPtr->next;
+		}
+		if(previousPtr == NULL){
+			newPtr->next = (*ptr);
+			(*ptr) = newPtr;
+		}else{
+			previousPtr->next = newPtr;
+			newPtr->next = currentPtr;
+		}
+	}else{
+		printf("Buy more memory!");
+	}
 }
 
 
@@ -100,36 +120,35 @@ ptrNode merge(ptrNode const list1, ptrNode const list2){
 }
 
 
-ptrNode naturalMerge(ptrNode head){
-	if(head == NULL){
-		return NULL;
+void mergeTopDown(ptrNode* headPtr){
+	ptrNode head = (*headPtr);
+	ptrNode left, middle;
+	if(head == NULL || head->next == NULL){
+		return;
 	}
-	ptrNode result, array[ITEMS], natural[ITEMS], next;
-	result = head;
-	int k=0;
-	for(int i=0; i<ITEMS && result != NULL; i++){
-		array[i] = result;
-		result = result->next;
-	}
-	for(int i=0; i<ITEMS; i++){
-		for(int j=i+1; j<ITEMS; j++){
-			if(array[j-1]->value > array[j]->value){
-				array[j-1]->next = NULL;
-				natural[k] = array[i];
-				i = j;
-				k++;
-			}
+	getMiddle(head, &left, &middle);
+	mergeTopDown(&left);
+	mergeTopDown(&middle);
+	(*headPtr) = merge(left, middle);
+}
+
+
+void getMiddle(ptrNode head, ptrNode* left, ptrNode* middle){
+	ptrNode fast, slow;
+	slow = head;
+	fast = head->next;
+	while(fast != NULL){
+		fast = fast->next;
+		if(fast != NULL){
+			fast = fast->next;
+			slow = slow->next;
 		}
 	}
-	if(array[ITEMS-2]->value > array[ITEMS-1]->value){
-		natural[k++] = array[ITEMS-1];
-	}
-	result = natural[0];
-	for(int i=1; i<k; i++){
-		result = merge(result, natural[i]);
-	}
-	return result;
+	*left = head;
+	*middle = slow->next;
+	slow->next = NULL;
 }
+
 
 int isEmpty(ptrNode ptr){
 	if(ptr == NULL) return 1;

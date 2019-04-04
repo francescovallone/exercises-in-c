@@ -51,7 +51,7 @@ void insert(ptrNode *ptr, char value){
 		newPtr->next = NULL;
 		previousPtr = NULL;
 		currentPtr = (*ptr);
-		while(currentPtr != NULL && value > currentPtr->value){
+		while(currentPtr != NULL){
 			previousPtr = currentPtr;
 			currentPtr = currentPtr->next;
 		}
@@ -125,21 +125,14 @@ ptrNode mergeBottomUp(ptrNode head){
 	}
 	ptrNode array[ITEMS], result = head, next;
 	int i;
-	while(result != NULL){
+	for(i=0; i<ITEMS && result != NULL; i++){
 		next = result->next;
 		result->next = NULL;
-		for(i=0; i<ITEMS && array[i] != NULL; i++){
-			result = merge(array[i], result);
-			array[i] = NULL;
-		}
-		if(i == ITEMS){
-			i-=1;
-		}
 		array[i] = result;
 		result = next;
 	}
-	result = NULL;
-	for(i = 0; i<ITEMS; i++){
+	result = array[0];
+	for(i=1; i<ITEMS && array[i] != NULL; i++){
 		result = merge(array[i], result);
 	}
 	return result;
