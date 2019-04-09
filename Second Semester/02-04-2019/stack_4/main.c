@@ -36,5 +36,6 @@ int main(void){
 		scanf("%u", &choice);
 		getchar();
 	}
+	free(a);
 	return 0;
 }
