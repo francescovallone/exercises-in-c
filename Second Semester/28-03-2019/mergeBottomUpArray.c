@@ -30,7 +30,6 @@ void bottomUp(int array[], int size){
 
 
 void merge(int array[], int left, int middle, int middle2, int right, int size){
-	int i, j, k;
 	size_t leftIndex = left;
 	size_t rightIndex = middle2;
 	size_t combinedIndex = left;
@@ -51,7 +50,7 @@ void merge(int array[], int left, int middle, int middle2, int right, int size){
 			temp[combinedIndex++] = array[leftIndex++];		
 		}
 	}
-	for(i=left; i<=right; i++){
+	for(int i=left; i<=right; i++){
 		array[i] = temp[i];
 	}
 }

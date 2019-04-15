@@ -5,9 +5,7 @@
 
 
 int main(void){
-	Item* a = malloc(0*sizeof(Item));
-	a = resize(a);
-
+	stackInit();
 	Item value;
 	unsigned int choice;
 	printf("Choose a number between 1 and 2: ");
@@ -19,11 +17,11 @@ int main(void){
 				printf("Enter an int: ");
 				scanf("%d", &value);
 				getchar();
-				push(a, value);
+				push(value);
 				break;
 			case 2:
 				if(!isEmpty()){
-					printf("The popped element is %d", pop(a));
+					printf("The popped element is %d", pop());
 				}else{
 					printf("The array is empty!");
 				}
@@ -36,6 +34,5 @@ int main(void){
 		scanf("%u", &choice);
 		getchar();
 	}
-	free(a);
 	return 0;
 }

@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "item.h"
-#include "stack.h"
+#include "queue.h"
 
 
 int main(void){
-	stackInit();
+	queueInit();
 	Item value;
 	unsigned int choice;
 	printf("Choose a number between 1 and 2: ");
@@ -17,11 +17,11 @@ int main(void){
 				printf("Enter an int: ");
 				scanf("%d", &value);
 				getchar();
-				push(value);
+				enqueue(value);
 				break;
 			case 2:
 				if(!isEmpty()){
-					printf("The popped element is %d", pop());
+					printf("The popped element is %d", dequeue());
 				}else{
 					printf("The array is empty!");
 				}

@@ -5,22 +5,19 @@
 
 #define MAXINT 10;
 
+static Item* a;
+static int top = 0;
+static int size = 1;
 
-static int top = -1;
-static int size = 0;
 
-
-Item* resize(Item* a){
-	int temp = 2*size + 1;
-	a = realloc(a, temp*sizeof(Item));
-	size = temp;
+void stackInit(){
+	a = malloc((size)*sizeof(Item));
 }
 
 
-Item* decrease(Item* a){
-	int temp = (size)/2;
-	a = realloc(a, temp*sizeof(Item));
-	size = temp;
+void resize(int new_size){
+	a = realloc(a, new_size*sizeof(Item));
+	size = new_size;
 }
 
 
@@ -29,17 +26,19 @@ int isEmpty(){
 }
 
 
-void push(Item* a,Item item){
+void push(Item item){
 	if(top == size-1){
-		a = resize(a);
-	}else if(top == (size/2)-1){
-		a = decrease(a);
+		resize(size*2);
 	}
-	a[++top] = item;
+	a[top++] = item;
 }
 
 
-int pop(Item* a){
+Item pop(){
+	if((top<size/4) && (top > 4)){
+		resize(size/2);
+		size = size/2;
+	}
 	top--;
-	return a[top+1];
+	return a[top];
 }

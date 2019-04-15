@@ -7,7 +7,7 @@
 int main(void){
 	Item value;
 	unsigned int choice;
-	printf("Choose a number between 1 and 2");
+	printf("Choose a number between 1 and 2: ");
 	scanf("%u", &choice);
 	getchar();
 	while(choice != 3){
@@ -29,7 +29,7 @@ int main(void){
 				printf("Invalid choice");
 				break;
 		}
-		printf("Choose a number between 1 and 2");
+		printf("Choose a number between 1 and 2: ");
 		scanf("%u", &choice);
 		getchar();
 	}

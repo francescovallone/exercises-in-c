@@ -3,7 +3,6 @@
 #include "item.h"
 
 void stackInit();
-void resize(int);
 void push(Item);
-Item pop();
+int pop();
 int isEmpty();
