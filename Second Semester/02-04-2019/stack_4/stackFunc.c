@@ -37,7 +37,6 @@ void push(Item item){
 Item pop(){
 	if((top<size/4) && (top > 4)){
 		resize(size/2);
-		size = size/2;
 	}
 	top--;
 	return a[top];

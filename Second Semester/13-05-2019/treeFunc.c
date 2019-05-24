@@ -3,8 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "queue.h"
-#include "itemqueue.h"
+#include <string.h>
 
 
 struct treeNode{
@@ -46,15 +45,16 @@ static void insertNode(TreePtr* ptr, Item item){
 		(*ptr) = malloc(sizeof(TreeNode));
 		if((*ptr) != NULL){
 			(*ptr)->left = NULL;
-			(*ptr)->item = item;
+			(*ptr)->item = malloc((strlen(item)+1)*sizeof(char));
+			strcpy((*ptr)->item, item);
 			(*ptr)->right = NULL;
 		}else{
 			printf("Nope!");
 		}
 	}else{
-		if(item < (*ptr)->item){
+		if(strcmp((*ptr)->item, item) > 0){
 			insertNode(&(*ptr)->left, item);
-		}else if(item > (*ptr)->item){
+		}else if(strcmp((*ptr)->item, item) < 0){
 			insertNode(&(*ptr)->right, item);
 		}else{
 			printf("Duplicate");
@@ -65,14 +65,14 @@ static void insertNode(TreePtr* ptr, Item item){
 void inOrder(TreePtr ptr){
 	if(ptr != NULL){
 		inOrder(ptr->left);
-		printf("%3d", ptr->item);
+		printf("%s\n", ptr->item);
 		inOrder(ptr->right);
 	}
 }
 
 void preOrder(TreePtr ptr){
 	if(ptr != NULL){
-		printf("%3d", ptr->item);
+		printf("%s\n", ptr->item);
 		preOrder(ptr->left);
 		preOrder(ptr->right);
 	}
@@ -82,7 +82,7 @@ void postOrder(TreePtr ptr){
 	if(ptr != NULL){
 		postOrder(ptr->left);
 		postOrder(ptr->right);
-		printf("%3d", ptr->item);
+		printf("%s\n", ptr->item);
 	}
 }
 
@@ -108,11 +108,11 @@ void treePostOrder(void){
 bool search(Item item){
 	TreePtr tempNode = root;
 	while(tempNode){
-		if(tempNode->item == item){
+		if(strcmp(tempNode->item, item) == 0){
 			return true;
-		}else if(tempNode->item < item){
+		}else if(strcmp(tempNode->item, item) < 0){
 			tempNode = tempNode->right;
-		}else if(tempNode->item > item){
+		}else if(strcmp(tempNode->item, item) > 0){
 			tempNode = tempNode->left;
 		}
 	}
@@ -129,26 +129,32 @@ void printTree(TreePtr ptr, int space)
     printf("\n"); 
     for (int i = 5; i < space; i++)
         printf(" ");
-    printf("%3d\n", ptr->item); 
+    printf("%s\n", ptr->item); 
     printTree(ptr->left, space); 
 } 
    
 void print() { 
    printTree(root, 0);
+   printf("\n== INORDER ==\n");
+   treeInOrder();
+   printf("\n== PREORDER ==\n");
+   treePreOrder();
+   printf("\n== POSTORDER ==\n");
+   treePostOrder();
 }
 
 int distanceFromRoot(Item item, TreePtr ptr){
-	if(item == ptr->item) return 0;
-	else if(item < ptr->item) return distanceFromRoot(item, ptr->left);
+	if(strcmp(ptr->item, item) == 0) return 0;
+	else if(strcmp(ptr->item, item) > 0) return distanceFromRoot(item, ptr->left);
 	else return distanceFromRoot(item, ptr->right);
 }
 
 int distance(Item from, Item to, TreePtr ptr){
 	if(ptr == NULL) return -1;
-	if(from > ptr->item && to > ptr->item){
+	if(strcmp(ptr->item, from) < 0 && strcmp(ptr->item, to) < 0){
 		return distance(from, to, ptr->right);
 	}
-	if(from < ptr->item && to < ptr->item){
+	if(strcmp(ptr->item, from) > 0 && strcmp(ptr->item, to) > 0){
 		return distance(from, to, ptr->left);
 	}
 	return (distanceFromRoot(from, ptr) + distanceFromRoot(to, ptr));
@@ -176,10 +182,10 @@ void treeDeleteMin(){
 static void delete(TreePtr* ptr, Item item){
 	if((*ptr) == NULL) return;
 	else{
-		if((*ptr)->item > item){
+		if(strcmp((*ptr)->item, item) > 0){
 			delete(&((*ptr)->left), item);
 			return;
-		}else if((*ptr)->item < item){
+		}else if(strcmp((*ptr)->item, item) < 0){
 			delete(&((*ptr)->right), item);
 			return;
 		}else{
@@ -197,8 +203,4 @@ static void delete(TreePtr* ptr, Item item){
 
 void treeDelete(Item item){
 	delete(&root, item);
-}
-
-void bfs(TreeNode* ptr){
-	
 }

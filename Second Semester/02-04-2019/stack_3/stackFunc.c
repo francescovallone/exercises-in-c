@@ -17,12 +17,13 @@ Item* resize(Item* a){
 	size = temp;
 	printf("%d", size);
 	a = new;
+	return a;
 }
 
 
 Item* decrease(Item* a){
 	int temp = (size)/2;
-	Item new [temp];
+	Item new[temp];
 	for(int i = 0; i<size; i++){
 		new[i] = a[i];
 	}
