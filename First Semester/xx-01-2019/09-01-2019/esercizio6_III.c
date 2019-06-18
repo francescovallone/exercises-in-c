@@ -14,7 +14,7 @@ int main(){
         /* Controlla se il carattere in i di t sia uguale al carattere scelto dall'utente */
         if(t[i]== c){
             /* Alloca la memoria per il vettore j */
-            v[j] = malloc((i)*sizeof(char));
+            v[j] = malloc((i+1)*sizeof(char));
             /* Copia in v[j] la stringa t fino ad i+1 */
             strncpy(v[j], t, i+1);
             v[j][i+1] = '\0';
