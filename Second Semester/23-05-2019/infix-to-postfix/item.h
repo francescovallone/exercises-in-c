@@ -1,5 +1,5 @@
 #if !defined(ITEM)
-union multiType{
+typedef union multiType{
 	int i;
 	char c;
 } Item;

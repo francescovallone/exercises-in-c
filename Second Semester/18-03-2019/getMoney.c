@@ -6,7 +6,6 @@
 
 int get_money(int rows, int cols, int array[rows][cols], int pos_x, int pos_y, int bt[rows][cols]);
 int max(int a, int b);
-
 static int memo[N][M];
 
 int main(){

@@ -55,7 +55,7 @@ Item stackPop(S stack){
 		(stack->N)--;
 		return item;
 	}
-	return -1;
+	return (Item)(-1);
 }
 
 
@@ -64,7 +64,7 @@ Item stackPeek(S stack){
 		Item item = stack->top->item;
 		return item;
 	}
-	return -1;
+	return (Item)(-1);
 }
 
 
